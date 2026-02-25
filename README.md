@@ -49,3 +49,11 @@ Para cuestiones sobre seguridad con PDO, gestión de excepciones, mapeo de datos
 
 - [Seguridad y buenas prácticas en modelos y servicios](docs/hito-6-seguridad-modelos-servicios.md)
 
+## Documentación Hito 7: Validación y sanitización de formularios.
+
+### Recursos adicionales
+
+Para cuestiones sobre la diferencia entre sanitización y validación, protección frente a XSS, experiencia de usuario y responsabilidad del código, consulta la documentación ampliada:
+
+- [Validación y sanitización de formularios](docs/hito-7-validacion-sanitizacion.md)
+
