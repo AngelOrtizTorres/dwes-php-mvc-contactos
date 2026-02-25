@@ -25,3 +25,12 @@ Para cuestiones sobre configuración, separación de responsabilidades, manejo d
 - [Configuración y seguridad](docs/hito-2-arranque.md)
 
 
+## Documentación Hito 4: Router y Dispatcher.
+
+### Recursos adicionales
+
+Para entender la separación de responsabilidades entre Router y Dispatcher, la importancia de la limpieza de URLs y la dinamicidad en la creación de controladores, consulta la documentación ampliada:
+
+- [Router y Dispatcher](docs/hito-4-router-dispatcher.md)
+
+
