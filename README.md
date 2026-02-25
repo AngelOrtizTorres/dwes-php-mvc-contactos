@@ -41,3 +41,11 @@ Para cuestiones sobre herencia en controladores, buffers de salida, seguridad en
 
 - [Controladores y Seguridad](docs/hito-5-controladores-seguridad.md)
 
+## Documentación Hito 6: Seguridad y buenas prácticas en modelos y servicios.
+
+### Recursos adicionales
+
+Para cuestiones sobre seguridad con PDO, gestión de excepciones, mapeo de datos y el patrón Singleton en modelos y servicios, consulta la documentación ampliada:
+
+- [Seguridad y buenas prácticas en modelos y servicios](docs/hito-6-seguridad-modelos-servicios.md)
+
