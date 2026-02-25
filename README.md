@@ -33,4 +33,11 @@ Para entender la separación de responsabilidades entre Router y Dispatcher, la 
 
 - [Router y Dispatcher](docs/hito-4-router-dispatcher.md)
 
+## Documentación Hito 5: Controladores y Seguridad.
+
+### Recursos adicionales
+
+Para cuestiones sobre herencia en controladores, buffers de salida, seguridad en métodos POST y limpieza de datos en vistas, consulta la documentación ampliada:
+
+- [Controladores y Seguridad](docs/hito-5-controladores-seguridad.md)
 

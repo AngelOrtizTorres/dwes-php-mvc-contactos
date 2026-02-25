@@ -12,6 +12,8 @@ use App\Core\Dispatcher;
  * FIN TAREA
 */
 require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../src/Controllers/IndexController.php';
+require_once __DIR__ . '/../src/Controllers/ContactoController.php';
 
 /*****************************************************
  * TAREA 2
