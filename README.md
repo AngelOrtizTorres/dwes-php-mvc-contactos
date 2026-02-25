@@ -1,1 +1,1 @@
-# dwes-php-mvc-contactos
+# Sistema de Gestión de Contactos en PHP (Arquitectura MVC)
