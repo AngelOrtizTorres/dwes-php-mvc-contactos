@@ -57,3 +57,11 @@ Para cuestiones sobre la diferencia entre sanitización y validación, protecci�
 
 - [Validación y sanitización de formularios](docs/hito-7-validacion-sanitizacion.md)
 
+## Documentación Hito 8: Buenas prácticas en vistas y experiencia de usuario.
+
+### Recursos adicionales
+
+Para cuestiones sobre separación de vistas, seguridad en la impresión de variables, buffers de salida y feedback al usuario, consulta la documentación ampliada:
+
+- [Buenas prácticas en vistas y experiencia de usuario](docs/hito-8-vistas-experiencia.md)
+
