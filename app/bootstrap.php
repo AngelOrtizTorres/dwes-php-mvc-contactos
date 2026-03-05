@@ -14,6 +14,7 @@
 // Definición de rutas de la aplicación (TAREA 2)
 require_once __DIR__ . '/config/config.php';
 require_once VENDOR_DIR . '/autoload.php';
+require_once APP_DIR . '/helpers/diasTranscurridos.php';
 
 /**
  * TAREA 4

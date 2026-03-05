@@ -25,9 +25,16 @@ class ContactoFormSanitizer
  
     public function sanitizeForOutput(array $data): array
     {
-        return array_map(function($value) {
-            return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
-        }, $data);
+        return array_map([$this, 'sanitizeOutputValue'], $data);
+    }
+
+    private function sanitizeOutputValue($value)
+    {
+        if (is_array($value)) {
+            return array_map([$this, 'sanitizeOutputValue'], $value);
+        }
+
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
     }
 
     private function sanitizeField(string $field, $value)

@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1><i class="fas fa-user-edit text-warning"></i> <?= htmlspecialchars($data['titulo']) ?></h1>
-                <a href="<?= BASE_URL ?>/contactos/ver/<?= $id ?>" class="btn btn-outline-secondary">
+                <a href="<?= BASE_URL ?>/contactos/ver/<?= $data['id'] ?>" class="btn btn-outline-secondary">
                     <i class="fas fa-times"></i> Cancelar
                 </a>
             </div>
@@ -16,7 +16,7 @@
                 </div>
             <?php endif; ?>
 
-            <form action="<?= BASE_URL ?>/contactos/editar/<?= $id ?>" method="POST" class="card shadow-sm border-warning">
+            <form action="<?= BASE_URL ?>/contactos/editar/<?= $data['id'] ?>" method="POST" class="card shadow-sm border-warning">
                 <div class="card-header bg-warning text-dark">
                     <h5 class="mb-0"><i class="fas fa-id-card-alt"></i> Modificar información del contacto</h5>
                 </div>
