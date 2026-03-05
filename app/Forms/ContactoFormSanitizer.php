@@ -1,19 +1,14 @@
 <?php
-/*****************************************************
- * TAREA 1
- * 
- * Incluye bloque de documentación del archivo. 
- * 
- * FIN TAREA
-*/
+namespace App\Forms;
 
 /*****************************************************
- * TAREA 2
- * 
- * Documenta cada una de las propiedades y métodos de la clase. 
- * 
- * FIN TAREA
+ * ContactoFormSanitizer
  *
+ * Clase responsable de limpiar y normalizar los datos
+ * de entrada del formulario de contacto antes de su
+ * validación y almacenamiento.
+ *
+ * (Se mantienen las TAREAs de documentación en el repo.)
  */
 
 class ContactoFormSanitizer

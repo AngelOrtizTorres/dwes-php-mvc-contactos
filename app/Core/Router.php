@@ -129,6 +129,8 @@ class Router
     private function cleanUri($uri)
     {
         $path = parse_url($uri, PHP_URL_PATH);
+        // Normalizar y eliminar segmento /public si aparece en la URL
+        $path = preg_replace('#^/public#', '', $path);
         $path = '/' . trim($path, '/');
         
         if ($this->basePath && strpos($path, $this->basePath) === 0) {

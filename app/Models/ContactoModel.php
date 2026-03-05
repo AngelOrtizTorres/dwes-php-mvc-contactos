@@ -107,25 +107,39 @@ class ContactoModel extends DBAbstractModel
    
     public function edit() 
     {
-    /*****************************************************
-     * TAREA 3
-     * 
-     * Implementa el método
-     * 
-     * FIN TAREA
-    */
+        try {
+            $this->query = "UPDATE contactos SET nombre = :nombre, telefono = :telefono, email = :email, updated_at = NOW() WHERE id = :id";
+            $this->parametros = [
+                'id' => $this->id,
+                'nombre' => $this->nombre,
+                'telefono' => $this->telefono,
+                'email' => $this->email
+            ];
+
+            $this->execute_single_query();
+            $this->mensaje = 'Contacto actualizado correctamente';
+            return true;
+        } catch (\Exception $e) {
+            $error = new DatabaseException("Error en BD: " . $e->getMessage());
+            $error->logError();
+            throw $error;
+        }
     }
 
     
     public function delete($id = '') 
     {
-    /*****************************************************
-     * TAREA 3
-     * 
-     * Implementa el método
-     * 
-     * FIN TAREA
-    */
+        try {
+            $this->query = "DELETE FROM contactos WHERE id = :id";
+            $this->parametros = ['id' => $id];
+            $this->execute_single_query();
+            $this->mensaje = 'Contacto eliminado correctamente';
+            return ($this->getAffectedRows() > 0);
+        } catch (\Exception $e) {
+            $error = new DatabaseException("Error en BD: " . $e->getMessage());
+            $error->logError();
+            throw $error;
+        }
     }
 
    
@@ -148,7 +162,7 @@ class ContactoModel extends DBAbstractModel
     public function getByFilter($filter) 
     {
         try {
-            $this->query = "SELECT * FROM contactos WHERE nombre";
+            $this->query = "SELECT * FROM contactos WHERE nombre LIKE :nombre";
             $this->parametros['nombre'] = "%$filter%";
             $this->get_results_from_query();
             return $this->rows;
@@ -164,7 +178,7 @@ class ContactoModel extends DBAbstractModel
     public function countAll() 
     {
         try {
-            $this->query = "SELECT COUNT(*) as total FROM contacto";
+            $this->query = "SELECT COUNT(*) as total FROM contactos";
             $this->parametros = []; 
             $this->get_results_from_query();
             return (int) ($this->rows[0]['total'] ?? 0);
@@ -179,8 +193,9 @@ class ContactoModel extends DBAbstractModel
     public function getLatest($limite) 
     {
         try {
-            $this->query = "SELECT * FROM contactos ORDER BY id DESC LIMIT :limite";
-            $this->parametros['limite'] = (int) $limite;
+            $lim = (int)$limite;
+            $this->query = "SELECT * FROM contactos ORDER BY id DESC LIMIT " . $lim;
+            $this->parametros = [];
             $this->get_results_from_query();
             return $this->rows;
             

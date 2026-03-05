@@ -44,6 +44,7 @@ abstract class DBAbstractModel
             self::$db_user = $_ENV['DBUSER'] ?? 'root';
             self::$db_pass = $_ENV['DBPASS'] ?? '';
             self::$db_name = $_ENV['DBNAME'] ?? '';
+            self::$db_port = $_ENV['DBPORT'] ?? '3306';
         }
     }
 

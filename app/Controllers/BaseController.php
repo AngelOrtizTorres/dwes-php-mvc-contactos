@@ -18,6 +18,8 @@
 
 namespace App\Controllers;
 
+use App\Services\ContactoService;
+
 
 class BaseController {
 
@@ -77,8 +79,28 @@ class BaseController {
             'mensaje' => $mensaje,
             'codigo'  => $codigo
         ];
+        // Si es un 404, intentamos obtener algunos contactos recientes para ayudar al usuario
+        if ($codigo === 404) {
+            try {
+                $svc = new ContactoService();
+                $data['ultimos_contactos'] = $svc->getUltimosContactos(3);
+                $data['total_contactos'] = $svc->getTotalContactos();
+            } catch (\Exception $e) {
+                // Silencioso: si falla el servicio no rompemos la página de error
+            }
+        }
 
         include VIEWS_DIR . '/errors/general_error.php';
+        exit;
+    }
+
+    public function mostrarErrorDB($mensaje) {
+        http_response_code(500);
+        $data = [
+            'titulo'  => 'Error de Base de Datos',
+            'mensaje' => $mensaje
+        ];
+        include VIEWS_DIR . '/errors/db_error.php';
         exit;
     }
 }

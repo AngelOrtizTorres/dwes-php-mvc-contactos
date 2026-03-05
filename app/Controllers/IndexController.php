@@ -11,7 +11,7 @@
 namespace App\Controllers;
 
 use App\Services\ContactoService;
-use App\Exceptions\DataBaseException;
+use App\Models\DatabaseException;
 
 class IndexController extends BaseController
 {
@@ -44,13 +44,13 @@ class IndexController extends BaseController
 
             $contactosRecientes = $this->contactoService->getUltimosContactos(RECENT_CONTACTS_LIMIT);
 
-            $this->renderHTML(VIEWS_DIR . '/index/index_view.php', [
+            $this->renderHTML(VIEWS_DIR . '/home/index_view.php', [
                 'titulo'  => 'Inicio | Agenda Pro',
                 'total'   => $totalContactos,
                 'ultimos' => $contactosRecientes
             ]);
 
-        } catch (DataBaseException $e) {
+        } catch (DatabaseException $e) {
             $this->mostrarErrorDB($e->getMessage());
 
         } catch (\Exception $e) {

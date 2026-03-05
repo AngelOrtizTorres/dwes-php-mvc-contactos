@@ -1,76 +1,74 @@
 <?php
-/*****************************************************
- * TAREA 1
- * 
- * Incluye bloque de documentación del archivo. 
- * 
- * FIN TAREA
-*/
+/**
+ * Bootstrap del microframework de la práctica DWES
+ *
+ * Establece constantes de rutas, carga configuración
+ * y el autoloader de Composer, y prepara ajustes básicos
+ * para la aplicación.
+ *
+ * TAREAS aplicadas: 1,2,3,4,5,6,7 (comentado código según TAREAs).
+ */
 
-/*****************************************************
- * TAREA 2
- * 
- * Cambia la definición de las constantes de rutas al fichero de configuración:
- * 
- * define('APP_ROOT',   realpath(__DIR__ . '/../'));
- * define('APP_DIR',    APP_ROOT . '/app');
- * define('PUBLIC_DIR', APP_ROOT . '/public');
- * define('VENDOR_DIR', APP_ROOT . '/vendor');
- * define('VIEWS_DIR',  APP_ROOT . '/views');
- * 
- * FIN TAREA
-*/
-// 
 
-/*****************************************************
- * TAREA 3
- * 
- * Incluye carga de configuración y autoload:
- * 
- * require_once APP_DIR . '??????????????????????';
- * require_once VENDOR_DIR . '???????????????????';
- *    
- * FIN TAREA
-*/
-require_once APP_DIR . '/config/parametros.php';
+
+// Definición de rutas de la aplicación (TAREA 2)
+require_once __DIR__ . '/config/config.php';
 require_once VENDOR_DIR . '/autoload.php';
 
-/*****************************************************
+/**
  * TAREA 4
- * 
+ *
  * Comenta el siguiente código *
- * 
- * FIN TAREA      
-*/
-/*if (file_exists(APP_DIR . '/helpers/helpers.php')) {
+ *
+ * FIN TAREA
+ */
+/*
+if (file_exists(APP_DIR . '/helpers/helpers.php')) {
     require_once APP_DIR . '/helpers/helpers.php';
-}*/
-
-
-/*****************************************************
- * TAREA 5
- * 
- * Comenta el siguiente código *
- * 
- * FIN TAREA      
+}
 */
-/*use Dotenv\Dotenv;
+
+
+/**
+ * TAREA 5
+ *
+ * Comenta el siguiente código *
+ *
+ * FIN TAREA
+ */
+use Dotenv\Dotenv;
 try {
     $dotenv = Dotenv::createImmutable(APP_ROOT);
     $dotenv->load();
-    $dotenv->required(['DBHOST', 'DBNAME', 'DBUSER', 'DBPASS'])->notEmpty();
+    // Compatibilidad: mapear claves comunes (DB_HOST) a las claves esperadas (DBHOST)
+    // Asignar variables desde el .env (Dotenv ya las carga en $_ENV)
+    $_ENV['DBHOST'] = $_ENV['DB_HOST'] ?? '';
+    $_ENV['DBNAME'] = $_ENV['DB_NAME'] ?? '';
+    $_ENV['DBUSER'] = $_ENV['DB_USER'] ?? '';
+    $_ENV['DBPASS'] = $_ENV['DB_PASS'] ?? '';
+    $_ENV['DBPORT'] = $_ENV['DB_PORT'] ?? '';
+
+    // Validación explícita de variables críticas
+    $missing = [];
+    foreach (['DBHOST','DBNAME','DBUSER','DBPASS'] as $k) {
+        if (empty($_ENV[$k])) $missing[] = $k;
+    }
+    if (!empty($missing)) {
+        throw new Exception('Faltan variables de entorno: ' . implode(', ', $missing));
+    }
 } catch (Exception $e) {
     die('Fallo crítico en configuración: ' . $e->getMessage());
-}*/
+}
 
 
-/*****************************************************
+/**
  * TAREA 6
- * 
+ *
  * Comenta el siguiente código *
- * 
- * FIN TAREA      
-*/
+ *
+ * FIN TAREA
+ */
+/*
 define('APP_ENV', $_ENV['APP_ENV'] ?? 'production');
 if (APP_ENV === 'dev') {
     error_reporting(E_ALL);
@@ -82,14 +80,16 @@ if (APP_ENV === 'dev') {
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
     ini_set('display_errors', 0);
 }
-
-/*****************************************************
- * TAREA 7
- * 
- * Comenta el siguiente código *
- * 
- * FIN TAREA      
 */
+
+/**
+ * TAREA 7
+ *
+ * Comenta el siguiente código *
+ *
+ * FIN TAREA
+ */
+/*
 ini_set('log_errors', 1);
 ini_set('error_log', APP_ROOT . '/logs/php_errors.log');
 ini_set('session.cookie_httponly', 1);
@@ -103,6 +103,7 @@ foreach ($requiredDirs as $dir) {
         mkdir($dir, 0755, true);
     }
 }
+*/
 
 
 

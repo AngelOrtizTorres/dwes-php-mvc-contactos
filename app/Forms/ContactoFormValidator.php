@@ -1,20 +1,5 @@
 <?php
-/*****************************************************
- * TAREA 1
- * 
- * Incluye bloque de documentación del archivo. 
- * 
- * FIN TAREA
-*/
-
-/*****************************************************
- * TAREA 2
- * 
- * Documenta cada una de las propiedades y métodos de la clase. 
- * 
- * FIN TAREA
-*/
-
+namespace App\Forms;
 
 class ContactoFormValidator
 {
@@ -33,7 +18,16 @@ class ContactoFormValidator
          * 
          * FIN TAREA
         */
-
+        $email = $data['email'] ?? '';
+        if (empty($email)) {
+            $errors['email'] = 'El email es obligatorio';
+        } else {
+            // Sanitize simple y validar formato
+            $cleanEmail = filter_var(mb_strtolower($email), FILTER_SANITIZE_EMAIL);
+            if (!filter_var($cleanEmail, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = 'El email no tiene un formato válido';
+            }
+        }
         $soloNumeros = preg_replace('/[^\d]/', '', $data['telefono'] ?? '');
         if (strlen($soloNumeros) < 9) {
             $errors['telefono'] = 'El teléfono debe tener al menos 9 dígitos';

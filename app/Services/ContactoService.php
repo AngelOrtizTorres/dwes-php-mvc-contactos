@@ -15,6 +15,11 @@
  * FIN TAREA
 */
 
+namespace App\Services;
+
+use App\Models\ContactoModel;
+use App\Models\DatabaseException;
+
 class ContactoService
 {
     private ContactoModel $contactoModel;
@@ -88,13 +93,17 @@ class ContactoService
 
     public function actualizarContacto(int $id, array $datos): bool
     {
-    /*****************************************************
-    * TAREA 3
-    * 
-    * Implementa el método. 
-    * 
-    * FIN TAREA
-    */
+        try {
+            $this->contactoModel->setId($id);
+            $this->contactoModel->setNombre($datos['nombre'] ?? '');
+            $this->contactoModel->setTelefono($datos['telefono'] ?? null);
+            $this->contactoModel->setEmail($datos['email'] ?? null);
+
+            return (bool)$this->contactoModel->edit();
+        } catch (DatabaseException $e) {
+            error_log('Error en Service::actualizarContacto: ' . $e->getMessage());
+            throw $e;
+        }
     }
 
     public function eliminarContacto(int $id): bool 
@@ -110,7 +119,7 @@ class ContactoService
     public function getTotalContactos(): int 
     {
         try {
-            return $this->contactoModel->All();
+            return (int)$this->contactoModel->countAll();
         } catch (DatabaseException $e) {
             error_log("Error en Service::getTotalContactos: " . $e->getMessage());
             throw $e;
