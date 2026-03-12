@@ -10,9 +10,19 @@
                     <a class="nav-link" href="<?= BASE_URL ?>/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= BASE_URL ?>/contactos">Contactos</a>
+                    <?php if (!empty($_SESSION['user'])): ?>
+                        <a class="nav-link" href="<?= BASE_URL ?>/contactos">Contactos</a>
+                    <?php endif; ?>
                 </li>
             </ul>
+        </div>
+        <div class="d-flex">
+            <?php if (!empty($_SESSION['user'])): ?>
+                <a class="nav-link text-light me-2" href="<?= BASE_URL ?>/logout">Salir</a>
+            <?php else: ?>
+                <a class="nav-link text-light me-2" href="<?= BASE_URL ?>/login">Acceder</a>
+                <a class="nav-link text-light" href="<?= BASE_URL ?>/register">Registrarse</a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
