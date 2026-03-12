@@ -109,11 +109,20 @@ foreach ($requiredDirs as $dir) {
 
 
 // 9. URL BASE PARA VISTAS
-// Fase 11: Definición de URL BASE
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-$host = $_SERVER['HTTP_HOST'];
-$scriptDir = str_replace('/public', '', dirname($_SERVER['SCRIPT_NAME']));
+// Definimos BASE_URL de forma segura, soportando ejecución desde CLI
+if (php_sapi_name() === 'cli' || PHP_SAPI === 'cli') {
+    // En CLI no hay host ni script; usamos un valor por defecto útil para scripts
+    define('BASE_URL', 'http://localhost');
+} else {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $scriptDir = str_replace('/public', '', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+    // Eliminamos barras finales sobrantes para evitar el error de doble barra
+    $baseUrl = rtrim($protocol . $host . $scriptDir, '/\\');
+    define('BASE_URL', $baseUrl);
 
-// Eliminamos barras finales sobrantes para evitar el error de doble barra //
-$baseUrl = rtrim($protocol . $host . $scriptDir, '/\\');
-define('BASE_URL', $baseUrl);
+    // Iniciamos la sesión de PHP si no está ya iniciada y si no se han enviado cabeceras
+    if (session_status() === PHP_SESSION_NONE) {
+        @session_start();
+    }
+}

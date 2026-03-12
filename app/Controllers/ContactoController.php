@@ -37,6 +37,8 @@ class ContactoController extends BaseController
     public function __construct() 
     {
         parent::__construct();
+        // Requiere que el usuario esté autenticado para todas las acciones de contactos
+        $this->requireLogin();
         $this->contactoService = new ContactoService();
         $this->contactoForm    = new ContactoForm();
     }

@@ -27,6 +27,23 @@ class BaseController {
        
     }
     
+    /**
+     * Comprueba si hay un usuario autenticado en la sesión.
+     */
+    protected function isLoggedIn(): bool {
+        return isset($_SESSION) && !empty($_SESSION['user']);
+    }
+
+    /**
+     * Fuerza el acceso solo a usuarios autenticados.
+     * Redirige al formulario de login si no hay sesión.
+     */
+    protected function requireLogin(): void {
+        if (!$this->isLoggedIn()) {
+            $this->redirect('/login');
+        }
+    }
+    
  
     public function renderHTML($fileName, $data = []) {
 

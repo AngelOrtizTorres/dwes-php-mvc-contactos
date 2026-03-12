@@ -1,6 +1,7 @@
 <?php
 use App\Controllers\IndexController;
 use App\Controllers\ContactoController;
+use App\Controllers\AuthController;
 use App\Core\Router;
 use App\Core\Dispatcher;
 
@@ -33,6 +34,13 @@ $router->post('/contactos/crear', [ContactoController::class, 'storeAction']);
 $router->get('/contactos/editar/{id}', [ContactoController::class, 'editAction']);
 $router->post('/contactos/editar/{id}', [ContactoController::class, 'updateAction']);
 $router->post('/contactos/borrar/{id}', [ContactoController::class, 'deleteAction']);
+// Rutas de autenticación
+$router->get('/login', [AuthController::class, 'loginAction']);
+$router->post('/login', [AuthController::class, 'authenticateAction']);
+$router->get('/logout', [AuthController::class, 'logoutAction']);
+// Rutas de registro
+$router->get('/register', [AuthController::class, 'registerAction']);
+$router->post('/register', [AuthController::class, 'registerAction']);
 /*****************************************************
  * TAREA 3
  * 
